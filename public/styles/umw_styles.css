@@ -1,0 +1,126 @@
+:root {
+    --blue: rgba(0, 43, 90, 1);
+    --orange: rgba(186, 143, 21, 1);
+}
+
+body {
+    background-color: rgb(64, 69, 79);
+}
+
+header {
+    background-color: rgb(230, 234, 238);
+    left: -15px;
+    position: relative;
+    width: 102.7%;
+}
+
+header h1, header h2, header h3, header h4, header h5 {
+    color: rgb(80, 107, 138);
+}
+
+.container{
+    background-color: #fff;
+    box-shadow: 2px 0px 2px #333, -2px 0px 2px #333;
+}
+
+.btn-umw-blue {
+    color: #fff;
+    background-color: var(--blue);
+    box-shadow: 4px 4px rgb(153, 153, 153)
+}
+
+.btn-umw-blue:hover {
+    color: #fff;
+    background-color: rgba(0, 43, 90, 0.9);
+    box-shadow: 4px 4px rgb(153, 153, 153)
+}
+
+.btn-umw-orange {
+    color: #fff;
+    background-color: var(--orange);
+    box-shadow: 4px 4px rgb(153, 153, 153)
+}
+
+.btn-umw-orange:hover {
+    color: #fff;
+    background-color: rgba(186, 143, 21, 0.9);
+    box-shadow: 4px 4px rgb(153, 153, 153)
+}
+
+.bg-umw-blue {
+    background-color: var(--blue);
+}
+
+.carousel {
+    overflow: hidden;
+}
+
+.carousel-indicators {
+    bottom: 75px;
+}
+
+.carousel-control-next {
+    bottom: 110px;
+}
+
+.carousel-control-prev {
+    bottom: 110px;
+}
+
+.carousel-item img {
+    max-height: 338px;
+    object-fit: cover;
+}
+
+@media (min-width: 992px) and (max-width: 1200px) {
+    
+    header {
+        width: 103.25%;
+    }
+
+    .carousel-item img {
+        max-height: 283px;
+        object-fit: cover;
+    }
+
+    .carousel-indicators {
+        bottom: 100px;
+    }
+    
+}
+
+@media (min-width: 768px) and (max-width: 992px) {
+
+    header {
+        width: 104.4%;
+    }
+
+    .carousel-item img {
+        max-height: 210px;
+        object-fit: cover;
+    }
+
+    .carousel-indicators {
+        bottom: 100px;
+    }
+
+}
+
+@media (min-width: 576px) and (max-width: 768px) {
+    
+    header {
+        width: 106%;
+    }
+}
+
+@media (max-width: 575px) {
+    header {
+        width: 108.5%;
+    }
+}
+
+.carousel-caption {
+    position: relative;
+    left: 0;
+    top: 0;
+}

@@ -9,38 +9,119 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
     integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="/styles/homePage.css"/>
+    <!-- <link rel="stylesheet" type="text/css" href="/styles/homePage.css"/> -->
+    <link rel='stylesheet' type='text/css' href="/styles/umw_styles.css" />
     <title>EESC Alumni Database</title>
 </head>
 
 <body>
-    <div class="earth">
-        <div class="transparent"  style='height: 47rem;'>
-            <div class="headerbackground" style="background-size: 20% 90%; background-repeat: no-repeat; ">
-                <h2>Earth and Environmental Science Alumni Database
-            <br>College of Arts and Science</h2>
-            </div>
-            <br><br><br><br><br><br><br>
-            <div class="leftbutton-style">
-                <input style="margin-left: 175px; height: 80px; background-color: #0b5394; border-color: #0b5394; font-size: 20px; font-weight: bold;" type="button" onclick="location.href='/alumni/mainmenu'" class="btn btn-primary" value="Continue as Alumni" />
-            </div>
-            <div class="rightbutton-style">
-                <input style="height: 80px; font-size: 20px; background-color: #bf9000; border-color: #bf9000; font-weight: bold;"type="button" onclick="location.href='/admin/login'" class="btn btn-primary" value="Continue as Admin" />
-            </div>
-            </div>
+    <div class="navbar navbar-dark bg-umw-blue py-0">
+        <a class="navbar-brand d-none d-sm-block" href="/">
+            <img src="/images/UMW-Box-Logo.jpg" width="50" height="50" alt="UMW Box Logo">
+        </a>
+        <a class="navbar-brand h1 mx-auto" href='/'>UMW Alumni <br class='d-none'> Database</a>
+        <div class='navbar-nav'>
+        <a class='nav-link d-none d-sm-block' href='https://www.umw.edu/'>umw.edu</a>
+        </div>
     </div>
+    
 
-        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
-        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
-    integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous">
-</script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
-integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous">
-</script>
+    <div class='container'> 
+
+        <header class='px-3'> 
+            <h4>Our Mission Statement</h2>
+            <p class='mb-0'>The University of Mary Washington Alumni Database allows our faculty to easily stay in contact with and keep our alumni informed of campus activity. We want to do everything we can to take care of our Eagle Community, and especially in these times, want to keep our alumni connected to opportunities to enrich their careers and our school. We kindly ask all Mary Washington alumni to submit an alumni form so we can make UMW better together.</p>
+        </header>
+
+        <!-- Carousel -->
+        <div id="carouselIndicators" class="carousel slide w-75 mx-auto d-none d-md-block" data-ride="carousel">
+            <ol class="carousel-indicators my-4">
+                <li data-target="#carouselIndicators" data-slide-to="0" class="active"></li>
+                <li data-target="#carouselIndicators" data-slide-to="1"></li>
+                <li data-target="#carouselIndicators" data-slide-to="2"></li>
+            </ol>
+            <div class="carousel-inner mt-3">
+                <div class="carousel-item active peopleCarouselImg">
+                    <img class="d-block w-100" src="/images/UMW-alumni-1.jpg" alt="UMW Alumni Slide 1" >
+                    <a href='https://www.alumni.umw.edu/s/1588/rd17/interior.aspx?sid=1588&gid=1&pgid=394'>
+                    <div class="carousel-caption d-none d-sm-block text-dark mb-0 py-2"> 
+                        <h5 class='mb-0'>Homecoming</h5>
+                        <p>This year's event was virtual and was a big success! Thank you all for joining us for #StayHomecoming. We hope to see you #BackInTheBurg in person for the traditional tailgate next year!</p>
+                    </div>
+                    </a>
+                </div>
+                <div class="carousel-item peopleCarouselImg mb-md-4 mb-lg-4 mb-xl-0">
+                    <img class="d-block w-100" src="/images/UMW-alumni-2.jpg" alt="UMW Alumni Slide 2">
+                    <a href='https://www.alumni.umw.edu/s/1588/rd17/interior.aspx?sid=1588&gid=1&pgid=408'> 
+                        <div class="carousel-caption d-none d-md-block text-dark mb-0 py-2"> 
+                            <h5 class='mb-0'>Reunion Weekend</h5>
+                            <p>Make plans now to reconnect with your classmates and the campus you love. We would love to see you back on campus! </p>
+                        </div>
+                    </a>
+                </div>
+                <div class="carousel-item peopleCarouselImg mb-lg-4 mb-xl-0">
+                    <img class="d-block w-100" src="./images/UMW-alumni-3.jpg" alt="UMW Alumni Slide 3">
+                    <a href='https://www.alumni.umw.edu/s/1588/rd17/interior.aspx?sid=1588&gid=1&pgid=1942'>
+                        <div class="carousel-caption d-none d-md-block text-dark mb-0 py-2"> 
+                            <h5 class='mb-0'>Eagle Crawl</h5>
+                            <p>The Eagle Crawl is our biggest young-alumni event of the year. Mary Washington alumni gather each March for a pub crawl through favorite downtown watering holes.</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <a class="carousel-control-prev" href="#carouselIndicators" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselIndicators" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+
+
+        <div class='row py-3'> 
+            <div class='col-lg-2'></div>
+            <div class="col-lg-4 col-sm-6">
+                <div class="card">
+                    <div class='card-body'> 
+                        <div class="text-center">
+                        <a type="button" href='/alumni/mainmenu' class="btn btn-lg btn-umw-blue mb-3">Continue as Alumni</a>
+                        </div>
+                        <p class="card-text mb-0">For Alumni Users: </p>
+                        <ul class='list-group list-group-flush'>
+                            <li class="list-group-item">Enter alumni information into the database</li>
+                            <li class="list-group-item">View content and status of previous entries</li>
+                            <li class="list-group-item">Contact an administrator user for help</li>
+                        </ul>
+                        
+                    </div>
+                </div>
+            </div>
+            <div class='col-lg-4 col-sm-6 mt-3 mt-sm-0'> 
+                <div class="card h-100">
+                    <div class='card-body'> 
+                        <div class='text-center'>
+                            <a type="button" href='/admin/login' class="btn btn-lg btn-umw-orange mb-3">Continue as Admin</a>
+                        </div>
+                        <p class="card-text mb-0">For Alumni Users: </p>
+                        <ul class='list-group list-group-flush'>
+                            <li class="list-group-item">View all submited alumni entries</li>
+                            <li class="list-group-item">Manage status of alumni entries</li>
+                            <li class="list-group-item">Create, update, and remove alumni entries</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class='col-lg-2'></div>
+        </div>
+        
+    </div>
+            
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
 </body>
 </html>
