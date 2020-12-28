@@ -6,8 +6,8 @@ let { body, validationResult } = require('express-validator');
 let Alumni = require('../models/alumni');
 
 
-router.get('/form', (request, response, next) => {
-    response.sendFile(path.join(__dirname + '/../public/alumni_create.html'));
+router.get('/form', (req, res, next) => {
+    res.sendFile(path.join(__dirname + '/../public/alumni_create.html'));
 });
 
 router.post('/form', [
@@ -16,43 +16,58 @@ router.post('/form', [
     body('lastName', 'Last Name must be specified').trim().isLength({ min: 1}).escape(),
     body('gradYear', 'Graduation Year must be specified').trim().isLength({ min: 1}).escape(),
     body('degreeType', 'Degree Type must be specified').trim().isLength({ min: 1}).escape(),
-    body('occupation', 'Occupation must be specified').trim().isLength({ min: 1}).escape(),
+    body('occupation', 'Occupation error').trim().escape(),
     body('email', 'Email must be specified').trim().isLength({ min: 1}).escape().isEmail(),
-    body('email-confirm').trim().isLength({ min: 1}).escape().isEmail().custom((value, { req }) => {
+    body('emailConfirm').trim().isLength({ min: 1}).escape().isEmail().custom((value, { req }) => {
         if (value !== req.body.email) {
-            throw new Error('Email confirmation does not match email');
+            throw new Error('Emails do not match');
         }
         return true;
     }),
-    body('description').trim().optional({ checkFalsy: true }).escape(),
+    body('description').trim().escape(),
     body('emailList'),
 
-    (request, response, next) => {
+    (req, res, next) => {
 
-        const errors = validationResult(request);
+        console.log(req.body.emailConfirm)
+        const errors = validationResult(req);
 
         let alumni = new Alumni ({
-            firstName: request.body.firstName,
-            lastName: request.body.lastName,
-            gradYear: request.body.gradYear,
-            degreeType: request.body.degreeType,
-            occupation: request.body.occupation,
-            email: request.body.email,
-            emailList: request.body.emailList == 'on' ? true : false,
-            description: request.body.description,
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
+            gradYear: req.body.gradYear,
+            degreeType: req.body.degreeType,
+            occupation: req.body.occupation == '' ? 'N/A' : req.body.occupation,
+            email: req.body.email,
+            emailList: req.body.emailList == 'on' ? true : false,
+            description: req.body.description,
             createdDate: new Date(),
             status: 'pending'
         });
 
+      
+
         if (!errors.isEmpty()) {
             // Error block
-            response.sendFile(path.join(__dirname + '/../public/alumni_create.html'));
+            res.status(500).send(errors.array());
         } else {
             // Success block
-            alumni.save(function (err) {
-                if (err) { return next(err); }
-                response.sendFile(path.join(__dirname + '/../public/alumni_create_success.html'));
+            Alumni.find({'email' : alumni.email, 'status': 'approved'}).exec( (err, result) => {
+                if (err) {return next(err)}
+                console.log(result)
+                if (Object.keys(result).length === 0) {
+                    // Email is unique
+                    alumni.save(function (err) {
+                        if (err) { return next(err); }
+                        res.sendFile(path.join(__dirname + '/../public/alumni_create_success.html'));
+                    });
+                } else {
+                    // Email already exist
+
+                    res.status(500).sendFile(path.join(__dirname + '/../public/alumni_create.html'));
+                }
             });
+           
         }
     }
 ]); 

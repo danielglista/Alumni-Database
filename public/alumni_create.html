@@ -10,54 +10,89 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
     integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <link rel="stylesheet" href="/styles/alumni_form.css" type="text/css"/>
+    <link rel='stylesheet' type='text/css' href="/styles/umw_styles.css" />
 
     <title>EESC Alumni Database</title>
 </head>
 
 <body>
-    <div class="earth">
-    <div class="transparent">
-        <div class="headerbackground" style="background-size: 20% 90%; background-repeat: no-repeat;" type="button" onclick="location.href='/'">
-         <h2>Earth and Environmental Science Alumni Database
-            <br>College of Arts and Science</h2>
-        </div>
-        <h3>Alumni Information Form</h3>
-            <form method='POST' action=''>
-                    <fieldset>
-                        <p class="required">* Required</p>
-                        <p><label class="field" for='firstName'><span>*</span>First Name:</label>
-                        <input type='text' name='firstName' id='firstName' placeholder='John' class="textbox-300" style="margin-left: 73px;" required /></p>
-                        <p><label class="field" for='lastName'><span>*</span>Last Name:</label>
-                        <input class="textbox-300" style="margin-left: 75px;" type='text' name='lastName' id='lastName' placeholder='Doe' required /></p>
-                        <p><label class="field" for='email'><span>*</span>Email:</label>
-                        <input class="textbox-300" style="margin-left: 120px;" type='email' name='email' id='email' placeholder='johndoe@email.com' required /></p>
-                        <p><label class="field" for='email-confirm'><span>*</span>Confirm Email:</label>
-                        <input class="textbox-300" style="margin-left: 45px;" type='email' name='email-confirm' id='email-confirm' placeholder='johndoe@email.com' required /></p>
-                        <p><label class="field" for='gradYear'><span>*</span>Graduation Year:</label>
-                        <input class="textbox-300" style="margin-left: 30px;" type='text' name='gradYear' id='gradYear' placeholder='YYYY' required /></p>
-                        <p><label class="field" for='degreeType'><span>*</span>Degree Type:</label>
-                        <input class="textbox-300" style="margin-left: 60px;" type='text' name='degreeType' id='degreeType' placeholder='Geology' required /></p>
-                        <p><label class="field" for='occupation'><span>*</span>Occupation:</label>
-                        <input class="textbox-300" style="margin-left: 70px;" type='text' name='occupation' id='occupation' placeholder='If unemployed, type none' required /></p>
-                        <p><label class="field" for='description'>Personal/Professional Description:</label><br><br>
-                        <textarea type='text' name='description' id='description' wrap='soft'  style="height: 150px; width: 600px; resize: none;" placeholder="Tell us about any personal and/or professional accomplishments."></textarea></p>
-                        <p><label class="field" for='emailList'>Would you like to receive email alerts?</label>
-                        <input style="margin-left: 50px; height: 20px; width: 20px" type='checkbox' name='emailList' id='emailList' checked></p>
-                            <!-- <div class="leftbutton-style">
-                                <button style="width: 130px; height: 50px; font-size: 20px; display: block; font-weight: bold; background-color: green; border-color: green;" type='submit' class="btn btn-primary">Submit</button>
-                            </div>
-                            <div class="rightbutton-style">
-                                <input style="width: 130px; height: 50px; font-size: 20px; display: block; font-weight: bold; background-color: red; border-color: red;" type="button" onclick="location.href='/'" class="btn btn-primary" value="Cancel" />
-                            </div> -->
-                            <button class='btn btn-lg btn-success' type='submit'>Submit</button> 
-                            <a class='btn btn-lg btn-danger' role='button' href='/'>Cancel</a> 
-                            <a class='btn btn-lg btn-primary' style="background-color: #0b5394" role='button' href='/alumni/status'>View Form Entry</a>  
-                    </fieldset>
-                 
-            </form>
 
-            
+    <div class="navbar navbar-dark bg-umw-blue py-0">
+        <a class="navbar-brand d-none d-sm-block" href="/">
+            <img src="/images/UMW-Box-Logo.jpg" width="50" height="50" alt="UMW Box Logo">
+        </a>
+        <a class="navbar-brand h1 mx-auto" href='/'>UMW Alumni <br class='d-none'> Database</a>
+        <div class='navbar-nav'>
+        <a class='nav-link d-none d-sm-block' href='https://www.umw.edu/'>umw.edu</a>
         </div>
     </div>
+
+    <div class='container mt-5'> 
+    <div class='card w-100 w-lg-50 mx-auto'> 
+        <div class='card-body'> 
+            <form id="alumni_form" action=''>
+                <p class='text-danger' id='errorList'></p>
+                <div class="form-row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="firstName" class='required-item'>First Name</label>
+                            <input class="form-control" id="firstName" type="text" name="firstName" />
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="lastName" class='required-item'>Last Name</label>
+                            <input class="form-control" id="lastName" type="text" name="lastName" />
+                        </div>
+                    </div>
+                </div>
+                <div class='form-row'> 
+                    <div class='col'> 
+                        <div class="form-group">
+                            <label for="email" class='required-item'>Email</label>
+                            <input class="form-control" id="email" type="email" name="email" />
+                        </div>
+                    </div>
+                    <div class='col'> 
+                        <div class="form-group">
+                            <label for="emailConfirm" class='required-item'>Confirm Email</label>
+                            <input class="form-control" id="emailConfirm" type="email" name="emailConfirm" />
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="gradYear" class='required-item'>Graduation Year</label>
+                            <input class="form-control" id="gradYear" type="number" name="gradYear" />
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="degreeType" class='required-item'>Degree</label>
+                            <input class="form-control" id="degreeType" type="text" name="degreeType" />
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="occupation">Occupation</label>
+                    <input class="form-control" id="occupation" type="text" name="occupation" />
+                </div>
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <textarea class="form-control" id="description" type="text" name="description" ></textarea>
+                </div>
+                <div class="form-group form-inline">
+                    <label for="emailList">Subscribed to Email:</label>
+                    <input class="form-control ml-3" style="height: 20px; width: 20px" id="emailList" type="checkbox" name="emailList" >
+                </div>
+                <button role='submit' class='btn btn-primary' id='submit'>Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+    <script src='/scripts/alumni_form.js'></script>            
+
 </body>
 </html>

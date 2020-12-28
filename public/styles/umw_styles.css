@@ -18,11 +18,6 @@ header h1, header h2, header h3, header h4, header h5 {
     color: rgb(80, 107, 138);
 }
 
-.container{
-    background-color: #fff;
-    box-shadow: 2px 0px 2px #333, -2px 0px 2px #333;
-}
-
 .btn-umw-blue {
     color: #fff;
     background-color: var(--blue);
@@ -51,76 +46,28 @@ header h1, header h2, header h3, header h4, header h5 {
     background-color: var(--blue);
 }
 
-.carousel {
-    overflow: hidden;
+.required-item::after {
+    content: '*';
+    color: red;
 }
 
-.carousel-indicators {
-    bottom: 75px;
-}
-
-.carousel-control-next {
-    bottom: 110px;
-}
-
-.carousel-control-prev {
-    bottom: 110px;
-}
-
-.carousel-item img {
-    max-height: 338px;
-    object-fit: cover;
-}
-
-@media (min-width: 992px) and (max-width: 1200px) {
-    
-    header {
-        width: 103.25%;
-    }
-
-    .carousel-item img {
-        max-height: 283px;
-        object-fit: cover;
-    }
-
-    .carousel-indicators {
-        bottom: 100px;
-    }
-    
-}
-
-@media (min-width: 768px) and (max-width: 992px) {
-
-    header {
-        width: 104.4%;
-    }
-
-    .carousel-item img {
-        max-height: 210px;
-        object-fit: cover;
-    }
-
-    .carousel-indicators {
-        bottom: 100px;
-    }
-
-}
-
-@media (min-width: 576px) and (max-width: 768px) {
-    
-    header {
-        width: 106%;
+@media (min-width: 576px) {
+    .w-sm-50 {
+        width: 50% !important;
     }
 }
 
-@media (max-width: 575px) {
-    header {
-        width: 108.5%;
+
+@media (min-width: 768px) {
+    .w-md-50 {
+        width: 50% !important;
     }
 }
 
-.carousel-caption {
-    position: relative;
-    left: 0;
-    top: 0;
+@media (min-width: 992px) {
+    .w-lg-50 {
+        width: 50% !important;
+    }
 }
+
+

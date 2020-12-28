@@ -8,7 +8,7 @@ var AlumniSchema = new Schema(
         gradYear: {type: Number, required: true},
         occupation: {type: String, default: 'N/A'},
         degreeType: {type: String, required: true},
-        email: {type: String, required: true},
+        email: {type: String, required: true, unique: true},
         emailList: {type: Boolean, required: true, default: false},
         description: String,
         status: {type: String, enum: ['approved', 'pending'], default: 'pending', required: true},

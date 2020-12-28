@@ -60,6 +60,8 @@ router.post('/create', isLoggedIn, [
     body('occupation', 'Occupation error').trim().escape(),
     body('email', 'Email must be specified').trim().isLength({ min: 1}).escape(),
     body('email', 'Email must be valid').isEmail(),
+    // TODO
+   // body('email', 'email must be unique')
     body('description').trim().optional({ checkFalsy: true }).escape(),
 
     (req, res, next) => {
@@ -69,12 +71,12 @@ router.post('/create', isLoggedIn, [
 
         // create new alumni
         let alumni = new Alumni ({
-            firstName: req.body.firstName,
-            lastName: req.body.lastName,
+            firstName: toTitleCase(req.body.firstName),
+            lastName: toTitleCase(req.body.lastName),
             gradYear: req.body.gradYear,
-            degreeType: req.body.degreeType,
-            occupation: req.body.occupation == '' ? 'N/A' : req.body.occupation,
-            email: req.body.email,
+            degreeType: toTitleCase(req.body.degreeType),
+            occupation: req.body.occupation == '' ? 'N/A' : toTitleCase(req.body.occupation),
+            email: req.body.email.toLowerCase(),
             emailList: req.body.emailList,
             description: req.body.description,
             createdDate: new Date(),
@@ -160,7 +162,7 @@ router.delete('/:id/delete', isLoggedIn, (req, res, next) => {
 router.get('/dashboard', isLoggedIn, (req, res, next) => {
     Alumni.find({'status': 'approved'}).exec(function(err, alumni_list) {
         if (err) {return next(err);}
-        res.render('admin_dashboard.pug', {title: 'Dashboard', stylesheet: '/styles/dashboard.css', alumni_list: alumni_list})
+        res.sendFile(path.join(__dirname + '/../public/dashboard.html'))
     })
 });
 
@@ -233,5 +235,14 @@ function isLoggedIn(req, res, next) {
     } 
 
 }
+
+function toTitleCase(text) {
+    return  text.toLowerCase()
+            .split(' ')
+            .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
+            .join(' ');
+
+}
+
 module.exports = router;
 

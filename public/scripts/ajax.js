@@ -84,23 +84,7 @@ function GET_alumni_entries(params, callback) {
 
 }
 
-// Sorting alumni entries using headers
-function GET_alumni_sortentries(params, callback) {
-    let xhr = new XMLHttpRequest();
-    xhr.open('GET', '/api/alumnis?' + params, true);
-    xhr.send();
 
-    xhr.onload = function() {
-        if (xhr.status == 200){
-            if (callback) {callback(JSON.parse(xhr.response))}
-        }
-    }
-
-    xhr.onerror = function() {
-        console.log('XMLHTTPRequest error');
-    }
-
-}
 
 function GET_pending_alumni_sortentries(params, callback) {
     let xhr = new XMLHttpRequest();
