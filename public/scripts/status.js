@@ -10,6 +10,9 @@ function renderAlumni() {
 
 
             if (alumni !== undefined) {
+
+                document.querySelector('#error-msg').innerHTML = '';
+
                 if (document.querySelector('.card').classList.contains('expanded')) {
                     document.querySelector('.card').style.height = '8rem';
                     document.querySelector('.card').style.width = '22rem';
@@ -26,9 +29,22 @@ function renderAlumni() {
                 expand(alumni);     
                 }           
             } else {
-                // document.querySelector('.card').classList.toggle('expanded', true);
-                // document.querySelector('#error-msg').innerHTML = 'No entries found. This email is either incorrect or the entry has been deleted.';
-                // document.querySelector('.card').style.height = '11rem';
+                if (document.querySelector('.card').classList.contains('expanded')){
+                    setTimeout(() => {
+                        document.querySelector('#error-msg').innerHTML = 'No entries found. This email is either incorrect or the entry has been deleted.';
+                        document.querySelector('.card').classList.toggle('expanded', true);
+                    }, 600);
+                } else {
+                    setTimeout(() => {
+                        document.querySelector('#error-msg').innerHTML = 'No entries found. This email is either incorrect or the entry has been deleted.';
+                    }, 300);
+                }
+                
+                document.querySelector('.card').style.width = '22rem';
+                document.querySelector('.card').style.height = '11rem';
+                document.querySelector('#alumni_entry').style.display = 'none';
+                document.querySelector('#email-search').classList.remove('col-md-10');
+                document.querySelector('#search-btn-container').classList.remove('col-md-2');
             }
         })
     }

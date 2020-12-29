@@ -1,0 +1,3 @@
+#successCard {
+    transition: width 250ms 250ms ease, height 250ms ease;
+}

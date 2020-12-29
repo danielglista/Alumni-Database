@@ -89,10 +89,19 @@ router.post('/create', isLoggedIn, [
             res.status(500).send(errors.array());
         } else {
             // Success block
-            // Save the new alumni into the database
-            alumni.save(function (err) {
-                if (err) { return next(err); }
-                res.sendStatus(200);
+            Alumni.find({'email' : alumni.email, 'status': 'approved'}).exec( (err, result) => {
+                if (err) { res.send(500); }
+
+                if (Object.keys(result).length === 0) {
+                    // Email is unique
+                    alumni.save(function (err) {
+                        if (err) { return next(err); }
+                        res.sendStatus(200);
+                    });
+                } else {
+                    // Email already exist
+                    res.status(500).send([{"value":"","msg":"Email is already in use","param":"email","location":"body"}])
+                }
             });
         }
     }
@@ -241,7 +250,6 @@ function toTitleCase(text) {
             .split(' ')
             .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
             .join(' ');
-
 }
 
 module.exports = router;

@@ -37,8 +37,13 @@
     <main>
         <div class="buffer"></div>
         <div class="container mt-3">
-            <button class="btn btn-outline-success btn-sm mb-1" data-toggle='modal' data-target='#form_modal' data-type='Add'>Add Entry</button>
-            <button class="btn btn-outline-info btn-sm mb-1 mx-2" data-toggle='modal' data-target='#filter_modal'>Add Filter</button>
+            <div class='form-inline mb-1'> 
+                <button class="btn btn-outline-success" id='addBtn' data-toggle='modal' data-target='#form_modal' data-type='Add'>Add Entry</button>
+                <div class='ml-auto form-inline'> 
+                    <button class="btn btn-outline-info" id='addFilterBtn'>Add Filter</button>
+                    <button class="btn btn-outline-primary ml-2" id='searchBtn'>Search</button>
+                </div>
+            </div>
         
 
             <table class="table table-hover table-responsive-md">

@@ -1,7 +1,6 @@
 // Global variable for current table filters
 let alumniParams = 'status=approved';
 let sortedHeader = '';
-let isReverse;
 
 
 
@@ -13,7 +12,6 @@ document.querySelector('table').addEventListener('mouseleave', (event) => {
         button.style.visibility = 'hidden';
     });
 });
-
 
 
 // from event listener for dynamically setting form POST request url 
@@ -108,10 +106,49 @@ document.querySelector('#btn-x').addEventListener('click', resetForm());
 document.querySelectorAll('th').forEach( (th) => {
     th.addEventListener('click', (e) => {
         let element = e.target;
-        sortedHeader = element.dataset.header;
+        sortedHeader !== element.dataset.header ? sortedHeader = element.dataset.header : sortedHeader = '!' + element.dataset.header;
         renderTable();
-        console.log(element.dataset.header);
     });
+});
+
+document.querySelector('#searchBtn').addEventListener('click', () => {
+    let searchBtn = document.querySelector('#searchBtn');
+    if (!searchBtn.classList.contains('btn-close')) {
+        let addFilterBtn = document.querySelector('#addFilterBtn');
+        let searchBar = document.createElement('input');
+        searchBar.classList.add('form-control');
+        searchBar.id = 'searchBar';
+        searchBar.setAttribute('type', 'search');
+        searchBar.setAttribute('placeholder', 'Search');
+        searchBar.setAttribute('aria-label', 'search');
+        addFilterBtn.parentNode.replaceChild(searchBar, addFilterBtn);
+        searchBar.style.width = '5.75rem';
+        setTimeout(() => {
+            searchBar.style.width = '12rem';
+        }, 50);
+        
+        searchBtn.classList.remove('btn-outline-primary');
+        searchBtn.classList.add('btn-outline-danger', 'btn-close');
+        searchBtn.innerHTML = 'Close';
+
+        document.querySelector('#addBtn').style.display = 'none';
+    } else {
+        let searchBar = document.querySelector('#searchBar');
+        let addFilterBtn = document.createElement('button');
+        addFilterBtn.classList.add('btn', 'btn-outline-info');
+        addFilterBtn.id = 'addFilterBtn';
+        addFilterBtn.innerHTML = 'Add Filter';
+        addFilterBtn.style.padding = '0.375rem 0.75rem;';
+        searchBar.style.width = '5.91rem';
+        setTimeout(() => {
+            searchBar.parentNode.replaceChild(addFilterBtn, searchBar);
+        }, 500);
+        searchBtn.classList.remove('btn-outline-danger', 'btn-close');
+        searchBtn.classList.add('btn-outline-primary');
+        searchBtn.innerHTML = 'Search';
+
+        document.querySelector('#addBtn').style.display = 'flex';
+    }
 });
 
 // PAGE RENDERING FUNCTIONS
@@ -213,7 +250,13 @@ function renderTable() {
 
     GET_alumni_entries(alumniParams ? alumniParams : '', (alumnis) => {
         if (sortedHeader === '') {sortedHeader = 'lastName';}
-        alumnis.sort(function(a, b) {let valA = eval(`a.${sortedHeader}`); let valB = eval(`b.${sortedHeader}`); return (valA < valB) ? -1 : (valA > valB) ? 1 : 0;});
+        if (sortedHeader[0] !== '!') {
+            // ascending sort
+            alumnis.sort(function(a, b) {let valA = eval(`a.${sortedHeader}`); let valB = eval(`b.${sortedHeader}`); return (valA < valB) ? -1 : (valA > valB) ? 1 : 0;});
+        } else {
+            // decending sort
+            alumnis.sort(function(a, b) {let valA = eval(`a.${sortedHeader.substr(1)}`); let valB = eval(`b.${sortedHeader.substr(1)}`); return (valA > valB) ? -1 : (valA < valB) ? 1 : 0;});
+        }
 
 
         let tbody = document.querySelector('tbody');
@@ -224,13 +267,13 @@ function renderTable() {
         for (i in alumnis) {
             let tr = document.createElement('tr'); 
             tr.innerHTML = `
-            <td class='text-truncate' data-toggle='modal' data-target='#form_modal' data-type='View' alumni_id='${alumnis[i]._id}'>${alumnis[i].firstName}</td>
-            <td class='text-truncate' data-toggle='modal' data-target='#form_modal' data-type='View' alumni_id='${alumnis[i]._id}'>${alumnis[i].lastName}</td>
-            <td class='text-truncate' data-toggle='modal' data-target='#form_modal' data-type='View' alumni_id='${alumnis[i]._id}'>${alumnis[i].gradYear}</td>
-            <td class='text-truncate' data-toggle='modal' data-target='#form_modal' data-type='View' alumni_id='${alumnis[i]._id}'>${alumnis[i].degreeType}</td>
-            <td class='text-truncate' data-toggle='modal' data-target='#form_modal' data-type='View' alumni_id='${alumnis[i]._id}'>${alumnis[i].occupation}</td>
-            <td class='text-truncate' data-toggle='modal' data-target='#form_modal' data-type='View' alumni_id='${alumnis[i]._id}'>${alumnis[i].email}</td>
-            <td data-toggle='modal' data-target='#form_modal' data-type='View' alumni_id='${alumnis[i]._id}'>${alumnis[i].emailList}</td>
+            <td class='text-truncate' alumni_id='${alumnis[i]._id}'>${alumnis[i].firstName}</td>
+            <td class='text-truncate' alumni_id='${alumnis[i]._id}'>${alumnis[i].lastName}</td>
+            <td class='text-truncate' alumni_id='${alumnis[i]._id}'>${alumnis[i].gradYear}</td>
+            <td class='text-truncate' alumni_id='${alumnis[i]._id}'>${alumnis[i].degreeType}</td>
+            <td class='text-truncate' alumni_id='${alumnis[i]._id}'>${alumnis[i].occupation}</td>
+            <td class='text-truncate' alumni_id='${alumnis[i]._id}'>${alumnis[i].email}</td>
+            <td alumni_id='${alumnis[i]._id}'>${alumnis[i].emailList}</td>
             <td class='px-0'><button class='btn btn-secondary btn-sm mr-3' data-toggle='modal' data-target='#form_modal' data-type='Update' alumni_id='${alumnis[i]._id}'>Update</button></td>
             <td class='px-0'><button class='btn btn-danger btn-sm delete_btn' alumni_id='${alumnis[i]._id}'>Delete</button></td>`;
             tbody.appendChild(tr);

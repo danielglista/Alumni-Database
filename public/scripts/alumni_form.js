@@ -38,9 +38,25 @@ function submitForm(e){
 
     POST_alumni_form(params, (status, errors) => {
         if (status == 200) {
+            let formCard = document.querySelector('.card-body');
+            let successCard = document.createElement('div');
+            successCard.classList.add('card', 'mt-5');
+            successCard.id = 'successCard';
+            console.log(formCard.getBoundingClientRect().width)
+            successCard.style.width = formCard.getBoundingClientRect().width + 'px';
+            successCard.style.height = formCard.getBoundingClientRect().height + 'px';;
+            successCard.style.margin = 'auto';
+            
 
+            let container = document.querySelector('.container');
+            document.body.insertBefore(successCard, container);
+
+            formCard.parentElement.remove();
+            document.querySelector('#successCard').style.width = '20rem';
+            document.querySelector('#successCard').style.height = '10rem';
+
+            setTimeout(() => {successCard.innerHTML = '<div class="card-body text-center"><p class="card-text">Your form was successfully submitted! Click the button below to return to the home page.</p><a href="/" class="btn btn-primary">Home</a></div>'}, 550);
         } else if (status == 500) {
-            console.log(errors)
             renderFormErrors(errors);
         }
     })
