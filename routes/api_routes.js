@@ -10,21 +10,43 @@ router.use(bodyParser.urlencoded({extended : true}));
 
 // Returns all approved alumni entries
 router.get('/alumnis', (req, res, next) => {
-    let query = {};
+    let query;
+    Object.keys(req.query).length > 1 ? query = { "$or": [] } : query = {};
     for(let key in req.query){ 
         if (Number.isNaN(parseInt(req.query[key]))) {
-            if (key == 'email' || key == '_id') {
+            if (key == 'status') {
                 req.query[key] !== "" ? query[key] = req.query[key] : null;
+            } else if (key == '_id') {
+                let obj = {[key]: req.query[key]}
+                req.query[key] !== "" ? query['$or'].push(obj) : null;
             } else {
-                req.query[key] !== "" ? query[key] = {$regex: req.query[key]} : null;
+                let obj = {[key]: {$regex: req.query[key]}}
+                req.query[key] !== "" ? query['$or'].push(obj) : null;
             }
         } else {
-            req.query[key] !== "" ? query[key] = {$eq: req.query[key]} : null;
+            if (key == '_id') {
+                req.query[key] !== "" ? query[key] = req.query[key] : null;
+            } else {
+                let obj = {[key]: {$eq: req.query[key]}}
+                req.query[key] !== "" ? query['$or'].push(obj) : null;
+            }
         }
     }
-
-    Alumni.find(query, (err, results) => {
+    console.log(query)
+    // console.log(JSON.stringify(query))
+   // console.log(JSON.stringify(query))
+   // query = `{ "$or": [` + JSON.stringify(query) + ']}';
+    // query = "{'gradyear': 2020}";
+    // console.log(query);
+    // query = `{"$or": [{"firstName": "Dan"}, {"lastName": "Smith"}] }`;
+    // console.log(typeof query);
+   // query = JSON.parse(query);
+    //{$or: [{firstName: 'Dan'}, {lastName: 'Smith'}] }
+   // console.log(query)
+    Alumni.find(query).exec((err, results) => {
+        
         if (err) {return next(err);}
+        
         res.setHeader('content-type', 'application/json')
         res.status(200).json(results)
     })

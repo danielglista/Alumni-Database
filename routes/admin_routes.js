@@ -178,7 +178,7 @@ router.get('/dashboard', isLoggedIn, (req, res, next) => {
 router.get('/pending', isLoggedIn, (req, res, next) => {
     Alumni.find({'status': 'pending'}).exec((err, alumni_list) => {
         if (err) {return next(err);}
-        res.render('pending_dashboard.pug', {title: 'Pending', stylesheet: '/styles/dashboard.css', alumni_list: alumni_list});
+        res.sendFile(path.join(__dirname + '/../public/pending.html'))
     });
 });
   

@@ -20,7 +20,7 @@
                     <a href="/admin/dashboard" class="nav-link active">Dashboard</a>
                 </li>
                 <li class="nav-item">
-                    <a href="/admin/pending" class="nav-link">Pending</a>
+                    <a href="/admin/pending" class="nav-link">Pending <span class='badge bg-dark' id='pendingCount'></span></a>
                 </li>
             </ul>
             <ul class="navbar-nav ml-auto">
@@ -40,13 +40,13 @@
             <div class='form-inline mb-1'> 
                 <button class="btn btn-outline-success" id='addBtn' data-toggle='modal' data-target='#form_modal' data-type='Add'>Add Entry</button>
                 <div class='ml-auto form-inline'> 
-                    <button class="btn btn-outline-info" id='addFilterBtn'>Add Filter</button>
-                    <button class="btn btn-outline-primary ml-2" id='searchBtn'>Search</button>
+                    <label for='searchBar'>Search:</label>
+                    <input class='form-control ml-2' id='searchBar' type='search' aria-label="search" placeholder="Search">
                 </div>
             </div>
         
 
-            <table class="table table-hover table-responsive-md">
+            <table class="table table-hover table-responsive-xl">
                 <thead>
                     <tr>
                         <th class="text-truncate" scope='col' data-header='firstName' >First Name</th>

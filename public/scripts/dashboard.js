@@ -54,15 +54,6 @@ document.querySelector('.alumni_form').addEventListener('submit', (event) => {
 
 });
 
-// document.querySelector('#search').addEventListener('click', (event) => {
-//     console.log("here")
-//     let gradYear = document.querySelector('#searchGradYear').value;
-//     let degreeType = document.querySelector('#searchDegreeType').value;
-//     let occupation = document.querySelector('#searchOccupation').value;
-//     alumniParams = (gradYear != '' ? 'gradYear=' + gradYear : ''  ) + (degreeType != '' ? '&degreeType=' + degreeType : '') + (occupation != '' ? '&occupation=' + occupation : '') + '&status=approved';
-//     renderTable();
-// }) 
-
 function buttonVisibility(event) {
     document.querySelectorAll('tbody button').forEach((button) => {
         button.style.visibility = 'hidden';
@@ -111,45 +102,17 @@ document.querySelectorAll('th').forEach( (th) => {
     });
 });
 
-document.querySelector('#searchBtn').addEventListener('click', () => {
-    let searchBtn = document.querySelector('#searchBtn');
-    if (!searchBtn.classList.contains('btn-close')) {
-        let addFilterBtn = document.querySelector('#addFilterBtn');
-        let searchBar = document.createElement('input');
-        searchBar.classList.add('form-control');
-        searchBar.id = 'searchBar';
-        searchBar.setAttribute('type', 'search');
-        searchBar.setAttribute('placeholder', 'Search');
-        searchBar.setAttribute('aria-label', 'search');
-        addFilterBtn.parentNode.replaceChild(searchBar, addFilterBtn);
-        searchBar.style.width = '5.75rem';
-        setTimeout(() => {
-            searchBar.style.width = '12rem';
-        }, 50);
-        
-        searchBtn.classList.remove('btn-outline-primary');
-        searchBtn.classList.add('btn-outline-danger', 'btn-close');
-        searchBtn.innerHTML = 'Close';
+document.querySelector('#searchBar').addEventListener('input', alumniSearch);
 
-        document.querySelector('#addBtn').style.display = 'none';
+function alumniSearch(e) {
+    let query = e.target.value;
+    if (isNaN(query)) {
+        alumniParams = 'firstName=' + query + '&lastName=' + query  + '&degreeType=' + query + '&occupation=' + query + '&email=' + query + '&status=approved';
     } else {
-        let searchBar = document.querySelector('#searchBar');
-        let addFilterBtn = document.createElement('button');
-        addFilterBtn.classList.add('btn', 'btn-outline-info');
-        addFilterBtn.id = 'addFilterBtn';
-        addFilterBtn.innerHTML = 'Add Filter';
-        addFilterBtn.style.padding = '0.375rem 0.75rem;';
-        searchBar.style.width = '5.91rem';
-        setTimeout(() => {
-            searchBar.parentNode.replaceChild(addFilterBtn, searchBar);
-        }, 500);
-        searchBtn.classList.remove('btn-outline-danger', 'btn-close');
-        searchBtn.classList.add('btn-outline-primary');
-        searchBtn.innerHTML = 'Search';
-
-        document.querySelector('#addBtn').style.display = 'flex';
+        query !== '' ? alumniParams = '&gradYear=' + query + '&status=approved' : alumniParams =  '&status=approved';
     }
-});
+    renderTable(); 
+} 
 
 // PAGE RENDERING FUNCTIONS
 
@@ -283,5 +246,14 @@ function renderTable() {
     })
 }
 
+function renderPendingCount() {
+    GET_alumni_entries("status=pending", (alumnis) => {
+        document.querySelector('#pendingCount').innerHTML = Object.keys(alumnis).length;
+        console.log(alumnis);
+    })
+}
+
 
 renderTable();
+
+renderPendingCount();
