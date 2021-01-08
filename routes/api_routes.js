@@ -32,17 +32,6 @@ router.get('/alumnis', (req, res, next) => {
             }
         }
     }
-    console.log(query)
-    // console.log(JSON.stringify(query))
-   // console.log(JSON.stringify(query))
-   // query = `{ "$or": [` + JSON.stringify(query) + ']}';
-    // query = "{'gradyear': 2020}";
-    // console.log(query);
-    // query = `{"$or": [{"firstName": "Dan"}, {"lastName": "Smith"}] }`;
-    // console.log(typeof query);
-   // query = JSON.parse(query);
-    //{$or: [{firstName: 'Dan'}, {lastName: 'Smith'}] }
-   // console.log(query)
     Alumni.find(query).exec((err, results) => {
         
         if (err) {return next(err);}
@@ -52,12 +41,12 @@ router.get('/alumnis', (req, res, next) => {
     })
 });
 
-router.get('/alumniByEmail/:email', (req, res, next) => {
-    Alumni.findOne({'email': req.params.email}).exec((err, result) => {
-        if (err) {res.status(500);}
-        res.status(200).send(result);
-    })
-})
+// router.get('/alumniByEmail/:email', (req, res, next) => {
+//     Alumni.findOne({'email': req.params.email}).exec((err, result) => {
+//         if (err) {res.status(500);}
+//         res.status(200).send(result);
+//     })
+// })
 
 
 

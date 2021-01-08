@@ -2,17 +2,33 @@
 let alumniParams = 'status=approved';
 let sortedHeader = '';
 
-
-
 // EVENT LISTENERS
 
-// table event listener for hiding all update and delete buttons when mouse leaves table
-document.querySelector('table').addEventListener('mouseleave', (event) => {
-    document.querySelectorAll('tbody button').forEach((button) => {
-        button.style.visibility = 'hidden';
-    });
-});
 
+function displayButtonsOnTouch() {
+    document.querySelectorAll('tbody tr').forEach( tr => {
+        tr.addEventListener('touchend', () => {
+            if (!tr.classList.contains('active')) {
+                try {
+                    document.querySelector('tr.active').classList.remove('active');
+                } catch (error) {
+                    console.error(error);
+                } finally {
+                    tr.classList.add('active');
+                }
+            }
+            document.querySelectorAll('tr:not(.active) > td > button').forEach( button => {
+                button.setAttribute('style', '')
+            });
+            tr.querySelectorAll('button').forEach( button => {
+                setTimeout(() => {
+                    button.setAttribute('style', 'display: inline-block !important');
+                }, 0);
+                
+            })
+        })
+    })
+}
 
 // from event listener for dynamically setting form POST request url 
 document.querySelector('.alumni_form').addEventListener('submit', (event) => {
@@ -54,26 +70,6 @@ document.querySelector('.alumni_form').addEventListener('submit', (event) => {
 
 });
 
-function buttonVisibility(event) {
-    document.querySelectorAll('tbody button').forEach((button) => {
-        button.style.visibility = 'hidden';
-    });
-
-    let tr = event.target;
-    // Search block
-    while (tr !== this && !tr.matches('tr')) {
-        tr = tr.parentNode;
-    }
-    // Error block
-    if (tr === this) {
-        console.log("No table cell found");
-    // Found block
-    } else {
-        tr.querySelectorAll('button').forEach((button) => {
-            button.style.visibility = 'visible';
-        });
-    }
-}
 
 function addDeleteEventListeners() {
     document.querySelectorAll('.delete_btn').forEach((btn) => { 
@@ -94,10 +90,34 @@ addDeleteEventListeners();
 document.querySelector('#close').addEventListener('click', resetForm());
 document.querySelector('#btn-x').addEventListener('click', resetForm());
 
+// Heading Sort
 document.querySelectorAll('th').forEach( (th) => {
     th.addEventListener('click', (e) => {
+        // document.querySelectorAll('th:not(.positive-sort):not(.negative-sort)').forEach( (th) => {
+        //     console.log(th)
+        //     th.classList.remove('positive-sort');
+        //     th.classList.remove('negative-sort');
+        // });
         let element = e.target;
+
+        if (element.classList.contains('positive-sort')) {
+            element.classList.remove('positive-sort');
+            element.classList.add('negative-sort');
+        } else if (element.classList.contains('negative-sort')) {
+            element.classList.remove('negative-sort');
+            element.classList.add('positive-sort');
+        } else {
+            try {
+                document.querySelector('.positive-sort, .negative-sort').classList.remove('positive-sort', 'negative-sort')
+            } catch (error) {
+                console.error(error);
+            } finally {
+                element.classList.add('positive-sort');
+            }
+        }        
         sortedHeader !== element.dataset.header ? sortedHeader = element.dataset.header : sortedHeader = '!' + element.dataset.header;
+        console.log(element.classList.contains('text-truncate'))
+
         renderTable();
     });
 });
@@ -226,30 +246,38 @@ function renderTable() {
         let clone = tbody.cloneNode(false);
         tbody.parentNode.replaceChild(clone, tbody);
         tbody = clone;
-        tbody.addEventListener('mouseover', buttonVisibility);
+        //tbody.addEventListener('mouseover', buttonVisibility);
         for (i in alumnis) {
             let tr = document.createElement('tr'); 
             tr.innerHTML = `
-            <td class='text-truncate' alumni_id='${alumnis[i]._id}'>${alumnis[i].firstName}</td>
-            <td class='text-truncate' alumni_id='${alumnis[i]._id}'>${alumnis[i].lastName}</td>
-            <td class='text-truncate' alumni_id='${alumnis[i]._id}'>${alumnis[i].gradYear}</td>
-            <td class='text-truncate' alumni_id='${alumnis[i]._id}'>${alumnis[i].degreeType}</td>
-            <td class='text-truncate' alumni_id='${alumnis[i]._id}'>${alumnis[i].occupation}</td>
-            <td class='text-truncate' alumni_id='${alumnis[i]._id}'>${alumnis[i].email}</td>
+            <td class='text-nowrap' alumni_id='${alumnis[i]._id}'>${alumnis[i].firstName}</td>
+            <td class='text-nowarp' alumni_id='${alumnis[i]._id}'>${alumnis[i].lastName}</td>
+            <td class='text-nowrap' alumni_id='${alumnis[i]._id}'>${alumnis[i].gradYear}</td>
+            <td class='text-nowrap' alumni_id='${alumnis[i]._id}'>${alumnis[i].degreeType}</td>
+            <td class='text-nowrap' alumni_id='${alumnis[i]._id}'>${alumnis[i].occupation}</td>
+            <td class='text-nowrap' alumni_id='${alumnis[i]._id}'>${alumnis[i].email}</td>
             <td alumni_id='${alumnis[i]._id}'>${alumnis[i].emailList}</td>
-            <td class='px-0'><button class='btn btn-secondary btn-sm mr-3' data-toggle='modal' data-target='#form_modal' data-type='Update' alumni_id='${alumnis[i]._id}'>Update</button></td>
-            <td class='px-0'><button class='btn btn-danger btn-sm delete_btn' alumni_id='${alumnis[i]._id}'>Delete</button></td>`;
+            <td class='col-fixed-right text-nowrap p-0'>
+                <button class='btn btn-secondary btn-sm mr-4 mr-sm-0 mt-2 ml-2' data-toggle='modal' data-target='#form_modal' data-type='Update' alumni_id='${alumnis[i]._id}'>
+                    <i class="fas fa-pencil-alt d-sm-none"></i>
+                    <span class='d-none d-sm-inline'>Update</span>
+                </button>
+                <button class='btn btn-danger btn-sm delete_btn mt-2' alumni_id='${alumnis[i]._id}'>
+                    <i class="fas fa-trash d-sm-none"></i>
+                    <span class='d-none d-sm-inline'>Delete</span>
+                </button>
+            </td>`;
             tbody.appendChild(tr);
         }
 
         addDeleteEventListeners();
+        displayButtonsOnTouch();
     })
 }
 
 function renderPendingCount() {
     GET_alumni_entries("status=pending", (alumnis) => {
         document.querySelector('#pendingCount').innerHTML = Object.keys(alumnis).length;
-        console.log(alumnis);
     })
 }
 

@@ -2,8 +2,19 @@ nav {
     background-color: rgb(0, 43, 90);
 }
 
-td button, .hidden {
-    visibility: hidden;
+.hidden, td button {
+    display: none !important; 
+}
+
+.table-container {
+    overflow-x: auto; 
+    -webkit-overflow-scrolling: touch; 
+    margin-right: 8.22rem;
+}
+
+thead th {
+    position: sticky;
+    top: 0;
 }
 
 th {
@@ -11,19 +22,60 @@ th {
     cursor: pointer;
 }
 
+th.positive-sort::after {
+    content: '\22C0';
+}
+
+th.negative-sort::after {
+    content: '\22C1';
+}
+
+.col-fixed-right {
+    position: absolute;
+    right: 0;
+    width: 9.2rem;
+    height: 48.8px;
+}
+
+
+
+tr:hover > .col-fixed-right{
+    background-color: rgba(236, 236, 236, 1);
+}
+
 .buffer {
     width: 100%;
     height: 3.5rem;
 }
 
-td {
-    /* cursor: pointer;     */
+td:not(:last-child) {
+    max-width: 25ch;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
-#searchBar {
-    transition: width 500ms;
+@media screen and (max-width: 575px){
+    .col-fixed-right {
+        width: 6.5rem;
+    }
+
+    .table-container {
+        margin-right: 5.5rem;
+    }
+
+    #searchBar {
+        width: 10rem;
+    }
 }
 
-#addFilterBtn{
-    transition: width 500ms, color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;;
+
+@media (pointer: fine) {
+    tr:hover > .col-fixed-right > button {
+        display: inline-block !important;
+    }
 }
+
+
+
+

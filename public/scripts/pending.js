@@ -4,18 +4,31 @@ let sortedHeader = '';
 
 // EVENT LISTENERS
 
-// Table Header Listener for sorting the table
-const table = document.querySelector('table');
+function displayButtonsOnTouch() {
+    document.querySelectorAll('tbody tr').forEach( tr => {
+        tr.addEventListener('touchend', () => {
+            if (!tr.classList.contains('active')) {
+                try {
+                    document.querySelector('tr.active').classList.remove('active');
+                } catch (error) {
+                    console.log(error);
+                } finally {
+                    tr.classList.add('active');
+                }
+            }
+            document.querySelectorAll('tr:not(.active) > td > button').forEach( button => {
+                button.setAttribute('style', '')
+            });
+            tr.querySelectorAll('button').forEach( button => {
+                setTimeout(() => {
+                    button.setAttribute('style', 'display: inline-block !important');
+                }, 0);
+                
+            })
+        })
+    })
+}
 
-//  tbody event listener for displaying accept and reject buttons
-document.querySelector('tbody').addEventListener('mouseover', buttonVisibility);
-
-// table event listener for hiding all accept and reject buttons when mouse leaves table
-document.querySelector('table').addEventListener('mouseleave', (event) => {
-    document.querySelectorAll('tbody button').forEach((button) => {
-        button.style.visibility = 'hidden';
-    });
-});
 
 document.querySelectorAll('th').forEach( (th) => {
     th.addEventListener('click', (e) => {
@@ -66,8 +79,7 @@ function addButtonEventListeners() {
             POST_approve_alumni(id, (status) => {
                 if (status == 200) {
                     renderTable();
-                    resetForm();
-                    $('#form_modal').modal('hide');
+                    renderPendingCount();
                 }
             });
         });
@@ -77,8 +89,7 @@ function addButtonEventListeners() {
             DELETE_alumni(btn.getAttribute('alumni_id'), (status) => {
                 if (status == 200) {
                     renderTable();
-                    resetForm();
-                    $('#form_modal').modal('hide');
+                    renderPendingCount();
                 }
             })
         });
@@ -115,13 +126,31 @@ function renderTable() {
             <td class='text-truncate' data-toggle='modal' data-target='#form_modal' data-type='View' alumni_id='${alumnis[i]._id}'>${alumnis[i].occupation}</td>
             <td class='text-truncate' data-toggle='modal' data-target='#form_modal' data-type='View' alumni_id='${alumnis[i]._id}'>${alumnis[i].email}</td>
             <td data-toggle='modal' data-target='#form_modal' data-type='View' alumni_id='${alumnis[i]._id}'>${alumnis[i].emailList}</td>
-            <td class='px-0'><button class='btn btn-success btn-sm mr-3 accept_btn' alumni_id='${alumnis[i]._id}'>Accept</button></td>
-            <td class='px-0'><button class='btn btn-danger btn-sm reject_btn' alumni_id='${alumnis[i]._id}'>Reject</button></td>`;
+            <td class='col-fixed-right text-nowrap p-0'>
+                <button class='btn btn-success btn-sm mr-4 mr-sm-0 mt-2 ml-2 accept_btn' alumni_id='${alumnis[i]._id}'>
+                    <i class="fas fa-check d-sm-none"></i>
+                    <span class='d-none d-sm-inline'>Accept</span>
+                </button>
+                <button class='btn btn-danger btn-sm delete_btn mt-2 reject_btn' alumni_id='${alumnis[i]._id}'>
+                    <i class="fas fa-times fa-lg d-sm-none"></i>
+                    <span class='d-none d-sm-inline'>Reject</span>
+                </button>
+            </td>`;
             tbody.appendChild(tr);
         }
 
         addButtonEventListeners();
+        displayButtonsOnTouch();
     })
 }
 
+function renderPendingCount() {
+    GET_alumni_entries("status=pending", (alumnis) => {
+        document.querySelector('#pendingCount').innerHTML = Object.keys(alumnis).length;
+    })
+}
+
+
 renderTable();
+
+renderPendingCount();
