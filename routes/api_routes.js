@@ -13,27 +13,15 @@ router.get('/alumnis', (req, res, next) => {
     let query;
     Object.keys(req.query).length > 1 ? query = { "$or": [] } : query = {};
     for(let key in req.query){ 
-        if (Number.isNaN(parseInt(req.query[key]))) {
-            if (key == 'status') {
-                req.query[key] !== "" ? query[key] = req.query[key] : null;
-            } else if (key == '_id') {
-                let obj = {[key]: req.query[key]}
-                req.query[key] !== "" ? query['$or'].push(obj) : null;
-            } else {
-                let obj = {[key]: {$regex: req.query[key]}}
-                req.query[key] !== "" ? query['$or'].push(obj) : null;
-            }
+        if ((key == 'status') || (Object.keys(req.query).length == 1)) {
+            req.query[key] !== "" ? query[key] = req.query[key] : null;
         } else {
-            if (key == '_id') {
-                req.query[key] !== "" ? query[key] = req.query[key] : null;
-            } else {
-                let obj = {[key]: {$eq: req.query[key]}}
-                req.query[key] !== "" ? query['$or'].push(obj) : null;
-            }
+            let obj = Number.isNaN(parseInt(req.query[key])) ? {[key]: {$regex: req.query[key]}} : {[key]: {$eq: req.query[key]}}
+            req.query[key] !== "" ? query['$or'].push(obj) : null;
         }
     }
+
     Alumni.find(query).exec((err, results) => {
-        
         if (err) {return next(err);}
         
         res.setHeader('content-type', 'application/json')
