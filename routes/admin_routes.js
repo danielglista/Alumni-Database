@@ -28,15 +28,14 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser()); 
 passport.deserializeUser(User.deserializeUser()); 
 
-
-
 router.use((req, res, next) => {
     res.locals.errorMsg = req.flash('error');
     res.locals.error1 = req.flash('error1');
     //res.locals.user = req.user || null;
     //res.locals.currentPath = req.path;
     next();
-  });
+});
+
 
 router.get("/login", (req, res, next) => { 
     res.render("admin_login", {  error : req.flash('error') });

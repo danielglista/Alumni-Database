@@ -49,7 +49,7 @@ tr:hover > .col-fixed-right{
 }
 
 td:not(:last-child) {
-    max-width: 25ch;
+    max-width: 22ch;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
