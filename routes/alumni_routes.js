@@ -7,7 +7,7 @@ let Alumni = require('../models/alumni');
 
 
 router.get('/form', (req, res, next) => {
-    res.sendFile(path.join(__dirname + '/../public/alumni_create.html'));
+    res.sendFile(path.join(__dirname + '/../public/alumni_form.html'));
 });
 
 router.post('/form', [
@@ -63,7 +63,7 @@ router.post('/form', [
                     // Email is unique
                     alumni.save(function (err) {
                         if (err) { return next(err); }
-                        res.sendFile(path.join(__dirname + '/../public/alumni_create_success.html'));
+                        res.sendStatus(200);
                     });
                 } else {
                     // Email already exist

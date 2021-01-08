@@ -4,7 +4,7 @@ let async = require('async');
 let Alumni = require('./models/alumni.js');
 
 let mongoose = require('mongoose');
-let mongoDB = 'mongodb+srv://admin:EarthScience55@cluster0.na9dw.mongodb.net/alumnidb?retryWrites=true&w=majority';
+let mongoDB = 'mongodb+srv://admin:adminPassword@cluster0.ihh2i.mongodb.net/Alumni-Database?retryWrites=true&w=majority';
 mongoose.connect(mongoDB, { useNewUrlParser: true });
 mongoose.Promise = global.Promise;
 let db = mongoose.connection;

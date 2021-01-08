@@ -180,25 +180,12 @@ router.get('/pending', isLoggedIn, (req, res, next) => {
         if (err) {return next(err);}
         res.sendFile(path.join(__dirname + '/../public/pending.html'))
     });
-});
-  
+});  
 
-
-
-
-
-// Register an Admin
-
-//var username = "Pratima"
-//var password = "EarthScience"  
-  //User.register(new User({ username : username, password: password}), "test")
-  
-   
-//Handling user login 
 
 router.post("/change", isLoggedIn, function(req, res){
     if (req.body.username === 'admin'){
-        User.findById("5f92191883473964e2386e22")
+        User.findById("5ff8ba6184dacc6c74573345")
           .then(foundAdmin => {
             foundAdmin.changePassword(req.body.oldpassword, req.body.newpassword)
               .then(() => {
@@ -222,11 +209,6 @@ router.post('/login', passport.authenticate('local', {
 }));
 
 
-//Handling user logout  
-//router.get("/logout", function (req, res) { 
-  //  req.logout();
-    //res.sendFile(path.join(__dirname + '/../public/index.html'));
-//}); 
 
 router.get('/logout', function(req,res){
     req.logout();

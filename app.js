@@ -26,6 +26,8 @@ connection.once('open', () => {
     console.log("Connection to MongoDB successful")
 })
 
+mongoose.set('useFindAndModify', false);
+
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "pug");
