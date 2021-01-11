@@ -4,6 +4,9 @@ let sortedHeader = '';
 
 // EVENT LISTENERS
 
+// document.querySelector('body').addEventListener('touchend', () => {
+//     console.log('touchend event');
+// })
 
 function displayButtonsOnTouch() {
     document.querySelectorAll('tbody tr').forEach( tr => {

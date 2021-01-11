@@ -45,16 +45,7 @@ app.get('/', (req, res) => {
     res.render('index.html');
 });
 
-app.listen(port,
-    () => console.log(`Server is running on port ${port}`))
 
-
-// catch 404 and forward to error handler
-app.use(function (req, res, next) {
-    next(createError(404));
-});
-
-// error handler
 app.use(function (err, req, res, next) {
     // set locals, only providing error in development
     res.locals.message = err.message;
@@ -63,3 +54,15 @@ app.use(function (err, req, res, next) {
     // render the error page
     res.sendStatus(err.status || 500);
 });
+
+
+// catch 404 and forward to error handler
+app.use((req, res, next) => {
+    res.status(404);
+    res.sendFile(path.join(__dirname + '/public/404.html'));
+});
+
+// error handler
+
+
+app.listen(port, () => console.log(`Server is running on port ${port}`))

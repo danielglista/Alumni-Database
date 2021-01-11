@@ -10,12 +10,14 @@ nav {
     overflow-x: auto; 
     -webkit-overflow-scrolling: touch; 
     margin-right: 8.22rem;
+    z-index: 0;
 }
 
 thead th {
     position: sticky;
     top: 0;
 }
+
 
 th {
     border-top: transparent !important;
@@ -35,6 +37,8 @@ th.negative-sort::after {
     right: 0;
     width: 9.2rem;
     height: 48.8px;
+    z-index: 5;
+    /* outline: 2px black solid; */
 }
 
 
