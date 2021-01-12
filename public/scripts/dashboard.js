@@ -2,12 +2,13 @@
 let alumniParams = 'status=approved';
 let sortedHeader = '';
 
-// EVENT LISTENERS
+// Enable bootstrap tooltips
+var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+  return new bootstrap.Tooltip(tooltipTriggerEl)
+})
 
-// document.querySelector('body').addEventListener('touchend', () => {
-//     console.log('touchend event');
-// })
-
+// Change behavor of button display when on a touch device
 function displayButtonsOnTouch() {
     document.querySelectorAll('tbody tr').forEach( tr => {
         tr.addEventListener('touchend', () => {
@@ -96,11 +97,6 @@ document.querySelector('#btn-x').addEventListener('click', resetForm());
 // Heading Sort
 document.querySelectorAll('th').forEach( (th) => {
     th.addEventListener('click', (e) => {
-        // document.querySelectorAll('th:not(.positive-sort):not(.negative-sort)').forEach( (th) => {
-        //     console.log(th)
-        //     th.classList.remove('positive-sort');
-        //     th.classList.remove('negative-sort');
-        // });
         let element = e.target;
 
         if (element.classList.contains('positive-sort')) {
@@ -249,7 +245,6 @@ function renderTable() {
         let clone = tbody.cloneNode(false);
         tbody.parentNode.replaceChild(clone, tbody);
         tbody = clone;
-        //tbody.addEventListener('mouseover', buttonVisibility);
         for (i in alumnis) {
             let tr = document.createElement('tr'); 
             tr.innerHTML = `

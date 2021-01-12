@@ -42,9 +42,11 @@ router.get("/login", (req, res, next) => {
 
 }); 
 
+// Change Password feature is currently disabled.
 router.get("/change", isLoggedIn, (req, res, next) => { 
-    res.render("change_password",  {  error : req.flash('error1') });
-
+    res.status(404);
+    res.sendFile(path.join(__dirname + '/public/404.html'));
+    //res.render("change_password",  {  error : req.flash('error1') });
 }); 
    
 
