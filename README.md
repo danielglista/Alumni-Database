@@ -1,16 +1,16 @@
 Alumni Database for the University of Mary Washington
-<Live Website>
+<br>
+	[View Website](https://www.alumni-database.herokuapp.com)
  
  ## About the Project
- <Screenshot of Website>
  
 This website was created to help the professors and factulty of Mary Washington organize and maintain their alumni list. It allows alumni to enter their own data into the database and to opt into an email list. It also gives an administrator a dashboard with CRUD (create, read, update, delete) functionality.
 
 ## Frameworks
 
-- Bootstrap
-- Express
-- Mongoose
+- [Bootstrap](https://getbootstrap.com)
+- [Express](https://expressjs.com)
+- [Mongoose](https://expressjs.com)
 
 ## Getting Started
 
