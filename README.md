@@ -43,7 +43,7 @@ This website was created to help the professors and factulty of Mary Washington 
 
 - [Bootstrap](https://getbootstrap.com)
 - [Express](https://expressjs.com)
-- [Mongoose](https://expressjs.com)
+- [Mongoose](https://mongoosejs.com)
 
 ## Getting Started
 
