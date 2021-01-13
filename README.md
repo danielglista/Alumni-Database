@@ -7,7 +7,7 @@
   <h3 align="center">Alumni Database Website for the University of Mary Washington</h3>
 
   <p align="center">
-    <a href="hhttps://alumni-database.herokuapp.com/">View Website</a>
+    <a href="https://alumni-database.herokuapp.com/">View Website</a>
 </p>
 
 <details open="open">
