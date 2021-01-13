@@ -1,3 +1,18 @@
+Alumni Database for the University of Mary Washington
+<Live Website>
+ 
+ ## About the Project
+ <Screenshot of Website>
+ 
+This website was created to help the professors and factulty of Mary Washington organize and maintain their alumni list. It allows alumni to enter their own data into the database and to opt into an email list. It also gives an administrator a dashboard with CRUD (create, read, update, delete) functionality. This repository 
+
+
+
+
+
+
+
+
 ## Requirements
 - Heroku CLI
 - Node.js
