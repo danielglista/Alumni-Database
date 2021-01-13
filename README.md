@@ -60,7 +60,8 @@ You will need to npm installed. To do so run `npm install -g npm`
 
 ### Running Server
 
-To start the server use `node app` or use `npm start` for live refreshing.
+To start the server use `node app` or use `npm start` for live refreshing. <br>
+The server will run on port 5000 by default.
 
 *note: The credentials for the database are private, so cloned repos will not be able to access any database functionality.*
 
@@ -71,6 +72,9 @@ Alumni users can submit a new alumni entry, check the status of an existing entr
 ![Home Page Image](/images/alumni_options.PNG)
 Administrator users can accept or reject pending entries have basic CRUD (Create, Read, Update, and Delete) functionality alumni entries, and can accept or reject pending entries in the pending tab.
 ![Home Page Image](/images/dashboard.PNG)
+
+<br>
+*note: Bootstrap does not work in desktop Safari and certain functionality doesn't work on mobile Safari*
 
 ## Contact 
 
