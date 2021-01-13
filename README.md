@@ -74,6 +74,7 @@ Administrator users can accept or reject pending entries have basic CRUD (Create
 ![Home Page Image](/images/dashboard.PNG)
 
 <br>
+
 *note: Bootstrap does not work in desktop Safari and certain functionality doesn't work on mobile Safari*
 
 ## Contact 
