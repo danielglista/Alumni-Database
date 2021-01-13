@@ -94,7 +94,7 @@ addDeleteEventListeners();
 document.querySelector('#close').addEventListener('click', resetForm());
 document.querySelector('#btn-x').addEventListener('click', resetForm());
 
-// Heading Sort
+// Listens for active table header to be sorted
 document.querySelectorAll('th').forEach( (th) => {
     th.addEventListener('click', (e) => {
         let element = e.target;

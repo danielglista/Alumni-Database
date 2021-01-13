@@ -31,7 +31,7 @@ function alumnusCreate(firstName, lastName, gradYear, occupation, degreeType, em
 function createAlumniEntries(callback) {
     async.series([
     function(callback) {
-        alumnusCreate('John', 'Doe', 2018, 'Research Assistant', 'Envirnmental Science', 'johndoe@email.com' , true, null, 'pending', callback);
+        alumnusCreate('John', 'Doe', 2018, 'Research Assistant', 'Envirnmental Science', 'johndoe@email.com' , true, "I am the most 5 out of 10 man in the world.", 'pending', callback);
     },
     function(callback) {
         alumnusCreate('Mary', 'Johnson', 2020, 'Intern', 'Physics', 'maryjohnson@email.com' , false, null, 'pending', callback);
@@ -40,7 +40,7 @@ function createAlumniEntries(callback) {
         alumnusCreate('Chris', 'Miller', 2020, 'Intern' , 'Computer Science', 'chrismiller@email.com' , true, null, 'pending', callback);
     },
     function(callback) {
-        alumnusCreate('Amy', 'Smith', 2017, 'Accountant', 'Math', 'amysmith@email.com' , false, null, 'pending', callback);
+        alumnusCreate('Amy', 'Smith', 2017, 'Accountant', 'Math', 'amysmith@email.com' , false, 'I love UMW!', 'pending', callback);
     },
     function(callback) {
         alumnusCreate('Sam', 'Williams', 2015, 'Nurse', 'Biology', 'samwilliams@email.com' , true, null, 'pending', callback);
@@ -52,7 +52,7 @@ function createAlumniEntries(callback) {
         alumnusCreate('Greg', 'Cooper', 2018, 'Social Media Manager', 'Envirnmental Science', 'aregcooper@email.com' , true, null, 'pending', callback);
     },
     function(callback) {
-        alumnusCreate('Kelly', 'Jones', 2021, 'Student', 'English', 'kellyjones@email.com' , false, null, 'pending', callback);
+        alumnusCreate('Kelly', 'Jones', 2021, 'Student', 'English', 'kellyjones@email.com' , false, "Why am I here? I haven't even graduated yet?", 'pending', callback);
     },
     function(callback) {
         alumnusCreate('John', 'Lopez', 2017, 'Software Engineer', 'Computer Science', 'johnlopez@email.com' , true, null, 'pending', callback);

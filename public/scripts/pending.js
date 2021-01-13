@@ -2,8 +2,13 @@
 let alumniParams = 'status=pending';
 let sortedHeader = '';
 
-// EVENT LISTENERS
+// Enable bootstrap tooltips
+var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+  return new bootstrap.Tooltip(tooltipTriggerEl)
+})
 
+// Change behavor of button display when on a touch device
 function displayButtonsOnTouch() {
     document.querySelectorAll('tbody tr').forEach( tr => {
         tr.addEventListener('touchend', () => {
@@ -29,11 +34,29 @@ function displayButtonsOnTouch() {
     })
 }
 
-
+// Listens for active table header to be sorted
 document.querySelectorAll('th').forEach( (th) => {
     th.addEventListener('click', (e) => {
         let element = e.target;
+
+        if (element.classList.contains('positive-sort')) {
+            element.classList.remove('positive-sort');
+            element.classList.add('negative-sort');
+        } else if (element.classList.contains('negative-sort')) {
+            element.classList.remove('negative-sort');
+            element.classList.add('positive-sort');
+        } else {
+            try {
+                document.querySelector('.positive-sort, .negative-sort').classList.remove('positive-sort', 'negative-sort')
+            } catch (error) {
+                console.error(error);
+            } finally {
+                element.classList.add('positive-sort');
+            }
+        }        
         sortedHeader !== element.dataset.header ? sortedHeader = element.dataset.header : sortedHeader = '!' + element.dataset.header;
+        console.log(element.classList.contains('text-truncate'))
+
         renderTable();
     });
 });
