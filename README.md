@@ -4,66 +4,37 @@ Alumni Database for the University of Mary Washington
  ## About the Project
  <Screenshot of Website>
  
-This website was created to help the professors and factulty of Mary Washington organize and maintain their alumni list. It allows alumni to enter their own data into the database and to opt into an email list. It also gives an administrator a dashboard with CRUD (create, read, update, delete) functionality. This repository 
+This website was created to help the professors and factulty of Mary Washington organize and maintain their alumni list. It allows alumni to enter their own data into the database and to opt into an email list. It also gives an administrator a dashboard with CRUD (create, read, update, delete) functionality.
 
+## Frameworks
 
+- Bootstrap
+- Express
+- Mongoose
 
+## Getting Started
 
+The following instruction are for setting up and running a local instance of this repository. Click <here> if your looking for the live website. 
 
+### Prerequisites
 
+You will need to npm installed. To do so run `npm install -g npm`
 
+### Installation
 
-## Requirements
-- Heroku CLI
-- Node.js
-- NPM
+1. Clone the repo `git clone https://github.com/danielglista/Alumni-Database.git`
+2. Install npm packages `npm install`
 
-## Setup
+### Running Server
 
- Fork repo
- 
- clone the forked repo
-`git clone https://github.com/<username>/EESCAlumniDatabaseCPSC_430.git`
+To start the server use `node app` or use `npm start` for live refreshing.
 
-`cd EESCAlumniDatabaseCPSC_430`
+*note: The credentials for the database are private, so cloned repos will not be able to access any database functionality.*
 
-Please go to our Drive to get the username and password for the command below
+## Usage 
 
-`echo "ATLAS_URI=mongodb+srv://<username>:<password>@cluster0.na9dw.mongodb.net/alumnidb?retryWrites=true&w=majority" > .env`
+The alumni database website serves two users, alumni users and administrator users. Alumni users can submit a new alumni entry, check the status of an existing entry (Entries have a status of *pending* untill accepted by an administrator user), and contact an administrator user. Administrator users can accept or reject pending entries and have basic CRUD (Create, Read, Update, and Delete) functionality of accepted entries. 
 
-`npm install`
+## Contact 
 
-`heroku login`
-
-`heroku git:remote -a umw-earth-science`
-
-## Running Local Server
-
- To run the app use
- `npm run start` or `nodemon app.js`
-
-## After Changes
-`git add .`
-
-`git commit -m`
-
-`git push origin master`
-
-`git push heroku master`
-
-## MongoDB Dashboard 
-https://account.mongodb.com/account/login?signedOut=true
-
-## Heroku Dashboard
-https://id.heroku.com/login
-
-## Keep Fork Updated
-
-`git remote add upstream https://github.com/pratimakandel/EESCAlumniDatabaseCPSC_430.git `
-
-`git fetch upstream `
-
-`git pull upstream master `
-
-`git push origin master `
-
+Daniel Glista - dnglista@gmail.com
