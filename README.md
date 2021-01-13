@@ -1,7 +1,7 @@
 
 <p align="center">
   <a href="https://github.com/othneildrew/Best-README-Template">
-    <img src="images/block-logo.jpg" alt="Logo" width="80" height="80">
+    <img src="images/block-logo.jpg" alt="Logo" width="100" height="100">
   </a>
 
   <h3 align="center">Alumni Database Website for the University of Mary Washington</h3>
@@ -16,7 +16,7 @@
     <li>
       <a href="#about-the-project">About The Project</a>
       <ul>
-        <li><a href="#framworks">Frameworks</a></li>
+        <li><a href="#frameworks">Frameworks</a></li>
       </ul>
     </li>
     <li>
