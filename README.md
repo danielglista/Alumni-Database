@@ -1,54 +1,40 @@
-## Requirements
-- Heroku CLI
-- Node.js
-- NPM
-
-## Setup
-
- Fork repo
+Alumni Database for the University of Mary Washington
+<br>
+	[View Website](https://www.alumni-database.herokuapp.com)
  
- clone the forked repo
-`git clone https://github.com/<username>/EESCAlumniDatabaseCPSC_430.git`
+ ## About the Project
+ 
+This website was created to help the professors and factulty of Mary Washington organize and maintain their alumni list. It allows alumni to enter their own data into the database and to opt into an email list. It also gives an administrator a dashboard with CRUD (create, read, update, delete) functionality.
 
-`cd EESCAlumniDatabaseCPSC_430`
+## Frameworks
 
-Please go to our Drive to get the username and password for the command below
+- [Bootstrap](https://getbootstrap.com)
+- [Express](https://expressjs.com)
+- [Mongoose](https://expressjs.com)
 
-`echo "ATLAS_URI=mongodb+srv://<username>:<password>@cluster0.na9dw.mongodb.net/alumnidb?retryWrites=true&w=majority" > .env`
+## Getting Started
 
-`npm install`
+The following instruction are for setting up and running a local instance of this repository. Click <here> if your looking for the live website. 
 
-`heroku login`
+### Prerequisites
 
-`heroku git:remote -a umw-earth-science`
+You will need to npm installed. To do so run `npm install -g npm`
 
-## Running Local Server
+### Installation
 
- To run the app use
- `npm run start` or `nodemon app.js`
+1. Clone the repo `git clone https://github.com/danielglista/Alumni-Database.git`
+2. Install npm packages `npm install`
 
-## After Changes
-`git add .`
+### Running Server
 
-`git commit -m`
+To start the server use `node app` or use `npm start` for live refreshing.
 
-`git push origin master`
+*note: The credentials for the database are private, so cloned repos will not be able to access any database functionality.*
 
-`git push heroku master`
+## Usage 
 
-## MongoDB Dashboard 
-https://account.mongodb.com/account/login?signedOut=true
+The alumni database website serves two users, alumni users and administrator users. Alumni users can submit a new alumni entry, check the status of an existing entry (Entries have a status of *pending* untill accepted by an administrator user), and contact an administrator user. Administrator users can accept or reject pending entries and have basic CRUD (Create, Read, Update, and Delete) functionality of accepted entries. 
 
-## Heroku Dashboard
-https://id.heroku.com/login
+## Contact 
 
-## Keep Fork Updated
-
-`git remote add upstream https://github.com/pratimakandel/EESCAlumniDatabaseCPSC_430.git `
-
-`git fetch upstream `
-
-`git pull upstream master `
-
-`git push origin master `
-
+Daniel Glista - dnglista@gmail.com
