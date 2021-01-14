@@ -37,7 +37,7 @@
  
 ![Home Page Image](/images/home.PNG)
  
-This website was created to help the professors and factulty of Mary Washington organize and maintain their alumni list. It serves both alumni, who wish to be including in UMW's alumni list as well as faculty, who can access an administrator dashboard to manage the database. This website was built as part of a university project where students met with professors to create specific apps to fufil their goals. I met with several UMW professors to gather requirements and stayed connected with them throughout the development process. 
+This website was created to help the professors and faculty of Mary Washington organize and maintain their alumni list. It serves both alumni, who wish to be included in UMW's alumni list as well as faculty, who can access an administrator dashboard to manage the database. This website was built as part of a university project where students met with professors to create specific apps to fulfill their goals. I met with several UMW professors to gather requirements and stayed connected with them throughout the development process. 
 
 ## Frameworks
 
@@ -47,7 +47,7 @@ This website was created to help the professors and factulty of Mary Washington 
 
 ## Getting Started
 
-The following instruction are for setting up and running a local instance of this repository. Click [here](https://alumni-database.herokuapp.com/) if your looking for the live website. 
+The following instructions are for setting up and running a local instance of this repository. Click [here](https://alumni-database.herokuapp.com/) if you're looking for the live website. 
 
 ### Prerequisites
 
@@ -68,9 +68,9 @@ The server will run on port 5000 by default.
 ## Usage 
 
 The alumni database website serves two users, alumni users and administrator users. <br>
-Alumni users can submit a new alumni entry, check the status of an existing entry (Entries have a status of *pending* untill accepted by an administrator user), and contact an administrator user. 
+Alumni users can submit a new alumni entry, check the status of an existing entry (Entries have a status of *pending* until accepted by an administrator user), and contact an administrator user. 
 ![Home Page Image](/images/alumni_options.PNG)
-Administrator users can accept or reject pending entries have basic CRUD (Create, Read, Update, and Delete) functionality alumni entries, and can accept or reject pending entries in the pending tab.
+Administrator users have basic CRUD (Create, Read, Update, and Delete) functionality for alumni entries, and can accept or reject pending entries in the pending tab.
 ![Home Page Image](/images/dashboard.PNG)
 
 <br>
@@ -80,3 +80,5 @@ Administrator users can accept or reject pending entries have basic CRUD (Create
 ## Contact 
 
 Daniel Glista - dnglista@gmail.com
+
+
